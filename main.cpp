@@ -670,7 +670,7 @@ private:
         std::cout << ConsoleColor::colorText(title, ConsoleColor::Color::CYAN) << "\n";
         std::cout << ConsoleColor::bold("Ласкаво просимо до гри ХРЕСТИКИ-НУЛИКИ!") << "\n";
         std::cout << "Версія 1.0\n";
-        std::cout << "© 2023 Усі права захищені\n\n";
+        std::cout << "© 2025 Усі права захищені\n\n";
         std::cout << "Натисніть Enter, щоб продовжити...";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
