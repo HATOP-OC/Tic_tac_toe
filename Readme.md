@@ -42,6 +42,10 @@ Or manually:
 ```bash
 clang++ -g -Wall -Werror ./main.cpp -o main
 ```
+or 
+```bash
+g++ -std=c++17 -o tic_tac_toe main.cpp
+```
 
 To compile a debug version:
 
