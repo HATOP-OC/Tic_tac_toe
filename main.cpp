@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <random>
 
-// Клас для кольорового виводу в консоль
+ 
 class ConsoleColor {
 public:
     enum class Color {
@@ -44,15 +44,15 @@ public:
     static void clearScreen() {
         #ifdef _WIN32
             int result = system("cls");
-            (void)result; // Suppress unused result warning
+            (void)result;  
         #else
             int result = system("clear");
-            (void)result; // Suppress unused result warning
+            (void)result;  
         #endif
     }
 };
 
-// Клас ігрового поля
+
 class GameField {
 private:
     std::vector<std::vector<char>> cells;
@@ -661,7 +661,7 @@ private:
     static void showIntro() {
         clearScreen();
         std::string title = R"(  
-    ██    ██   ███████    ████████   ██████   ██████                   ██████    ██████  
+    ██    ██   ███████    ████████   ██████   █████                    ██████    ██████  
     ██    ██  ██     ██      ██     ██    ██ ██   ██                  ██    ██  ██      
     ████████  █████████      ██     ██    ██ ██████                   ██    ██  ██      
     ██    ██  ██     ██      ██     ██    ██ ██         ████████      ██    ██  ██      
