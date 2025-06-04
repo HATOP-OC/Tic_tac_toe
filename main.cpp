@@ -9,6 +9,9 @@
 #include <algorithm>
 #include <thread>
 #include <chrono>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -68,6 +71,16 @@ public:
 
     // Копіювальний конструктор
     GameField(const GameField& other) : cells(other.cells), size(other.size), symbolColors(other.symbolColors) {}
+
+    // Оператор присвоєння
+    GameField& operator=(const GameField& other) {
+        if (this != &other) {
+            cells = other.cells;
+            size = other.size;
+            symbolColors = other.symbolColors;
+        }
+        return *this;
+    }
 
     void reset() {
         cells = std::vector<std::vector<char>>(size, std::vector<char>(size, ' '));
@@ -301,7 +314,11 @@ public:
         for (int i = 0; i < 3; i++) {
             std::cout << ".";
             std::cout.flush();
+#ifdef _WIN32
+            Sleep(thinkTime/3);
+#else
             std::this_thread::sleep_for(std::chrono::milliseconds(thinkTime/3));
+#endif
         }
         std::cout << "\n";
         
@@ -909,9 +926,13 @@ public:
 int main() {
     // Налаштування локалі для підтримки Unicode
     #ifdef _WIN32
-        setlocale(LC_ALL, "");
-        // Для Windows потрібно також встановити UTF-8 кодування
-        system("chcp 65001");
+        // Налаштування UTF-8 та ANSI обробки консолі Windows
+        SetConsoleCP(CP_UTF8);
+        SetConsoleOutputCP(CP_UTF8);
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+        DWORD mode = 0;
+        GetConsoleMode(hOut, &mode);
+        SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
     #else
         std::setlocale(LC_ALL, "");
     #endif
